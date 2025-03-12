@@ -62,6 +62,13 @@ def websocket_conexao(ws):
                         certos, posicoes = verificar_tentativa(tentativa, senha_adversario)
                         resultado = f"{certos} números certos, {posicoes} na posição correta."
 
+                        # Registrar a tentativa
+                        salas[sala]["tentativas"].append({
+                            "jogador": jogador,
+                            "tentativa": tentativa,
+                            "resultado": resultado
+                        })
+
                         # Enviar feedback para os jogadores
                         for nome, conn in salas[sala]["jogadores"].items():
                             conn.send(json.dumps({
